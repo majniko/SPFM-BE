@@ -1,0 +1,17 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^@prisma-service$": "<rootDir>/src/core/prisma",
+    "^@core/(.*)$": "<rootDir>/src/core/$1",
+    "^@identity/(.*)$": "<rootDir>/src/domains/identity/$1",
+    "^@ecommerce/(.*)$": "<rootDir>/src/domains/ecommerce/$1",
+    "^@communication/(.*)$": "<rootDir>/src/domains/communication/$1"
+  }
+}

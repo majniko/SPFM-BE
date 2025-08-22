@@ -1,4 +1,4 @@
-# Personal Finance Tracker API
+# Simple Personal Finance Manager API
 
 A robust and scalable backend service for a personal finance tracking application, built with NestJS. This API provides essential features for managing users, categories, and financial transactions, with a secure authentication system.
 

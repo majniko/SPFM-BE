@@ -33,8 +33,8 @@ Follow these instructions to get the project up and running on your local machin
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://your-repository-url.git
-    cd project-directory
+    https://github.com/majniko/SPFM-BE.git
+    cd SPFM-BE
     ```
 
 2.  **Install dependencies:**

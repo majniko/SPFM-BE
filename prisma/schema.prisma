@@ -24,7 +24,7 @@ model categories {
   updatedAt DateTime @updatedAt
 }
 
-model entries {
+model transactions {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   userId     String
   categoryId String

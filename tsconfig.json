@@ -23,12 +23,12 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@/*": ["./src/*"],
-      "@prisma-service": ["./src/core/prisma"],
       "@core/*": ["./src/core/*"],
       "@identity/*": ["./src/domains/identity/*"],
-      "@ecommerce/*": ["./src/domains/ecommerce/*"],
+      "@finance/*": ["./src/domains/finance/*"],
       "@communication/*": ["./src/domains/communication/*"]
 
     }
-  }
+  },
+  "include": ["src/**/*"]
 }

@@ -34,7 +34,6 @@ describe('UsersService', () => {
     service = module.get<UsersService>(UsersService);
     prismaService = module.get<PrismaService>(PrismaService);
 
-    // Clear all mocks before each test
     jest.clearAllMocks();
   });
 

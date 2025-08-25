@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {CanActivate, InternalServerErrorException} from '@nestjs/common';
+import { CanActivate, InternalServerErrorException } from '@nestjs/common';
 
-import {AuthGuard} from "@identity/auth/auth.guard";
+import { AuthGuard } from '@identity/auth/auth.guard';
 
 import { TransactionsController } from './transactions.controller';
 import { TransactionsService } from './transactions.service';
@@ -29,9 +29,10 @@ describe('TransactionsController', () => {
           useValue: mockTransactionsService,
         },
       ],
-    }).overrideGuard(AuthGuard)
-        .useValue(mockAuthGuard)
-        .compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useValue(mockAuthGuard)
+      .compile();
 
     controller = module.get<TransactionsController>(TransactionsController);
     transactionsService = module.get<TransactionsService>(TransactionsService);
@@ -47,11 +48,29 @@ describe('TransactionsController', () => {
     it('should return all transactions for a user', async () => {
       const userId = 'user-123';
       const mockTransactions = [
-        { id: '1', title: 'Groceries', amount: 50, isExpense: true, categoryId: 'cat-1', date: new Date(), userId },
-        { id: '2', title: 'Salary', amount: 1000, isExpense: false, categoryId: 'cat-2', date: new Date(), userId },
+        {
+          id: '1',
+          title: 'Groceries',
+          amount: 50,
+          isExpense: true,
+          categoryId: 'cat-1',
+          date: new Date(),
+          userId,
+        },
+        {
+          id: '2',
+          title: 'Salary',
+          amount: 1000,
+          isExpense: false,
+          categoryId: 'cat-2',
+          date: new Date(),
+          userId,
+        },
       ];
-      
-      mockTransactionsService.findAllByUserId.mockResolvedValue(mockTransactions);
+
+      mockTransactionsService.findAllByUserId.mockResolvedValue(
+        mockTransactions,
+      );
 
       const result = await controller.findAll(userId);
 
@@ -77,15 +96,22 @@ describe('TransactionsController', () => {
       const result = await controller.create(createTransactionDto, userId);
 
       expect(result).toEqual(expectedResult);
-      expect(transactionsService.create).toHaveBeenCalledWith(createTransactionDto, userId);
+      expect(transactionsService.create).toHaveBeenCalledWith(
+        createTransactionDto,
+        userId,
+      );
     });
 
     it('should pass through errors from service', async () => {
       const error = new InternalServerErrorException('unexpected_prisma_error');
       mockTransactionsService.create.mockRejectedValue(error);
 
-      await expect(controller.create(createTransactionDto, userId)).rejects.toThrow(InternalServerErrorException);
-      await expect(controller.create(createTransactionDto, userId)).rejects.toThrow('unexpected_prisma_error');
+      await expect(
+        controller.create(createTransactionDto, userId),
+      ).rejects.toThrow(InternalServerErrorException);
+      await expect(
+        controller.create(createTransactionDto, userId),
+      ).rejects.toThrow('unexpected_prisma_error');
     });
   });
 });

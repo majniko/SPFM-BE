@@ -4,11 +4,7 @@ import { IdentityModule } from '@identity/identity.module';
 import { FinanceModule } from '@finance/finance.module';
 
 @Module({
-  imports: [
-    CoreModule,
-    IdentityModule,
-    FinanceModule
-  ],
+  imports: [CoreModule, IdentityModule, FinanceModule],
   controllers: [],
   providers: [],
 })

@@ -6,26 +6,29 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-    @HttpCode(HttpStatus.OK)
-    @Post('login')
-    @ApiOperation({ summary: 'Log in a user' })
-    @ApiResponse({
-        status: 200,
-        description: 'Login successful, returns an access token.',
-        schema: {
-            type: 'object',
-            properties: {
-                access_token: {
-                    type: 'string',
-                    example: 'eyJhbGciOiJMTzI1NiIsInR4cCI8IkpXVCJ2...',
-                },
-            },
+  @HttpCode(HttpStatus.OK)
+  @Post('login')
+  @ApiOperation({ summary: 'Log in a user' })
+  @ApiResponse({
+    status: 200,
+    description: 'Login successful, returns an access token.',
+    schema: {
+      type: 'object',
+      properties: {
+        access_token: {
+          type: 'string',
+          example: 'eyJhbGciOiJMTzI1NiIsInR4cCI8IkpXVCJ2...',
         },
-    })
-    @ApiResponse({ status: 401, description: 'Unauthorized, invalid credentials.' })
-    signIn(@Body() signInDto: LoginUserDto) {
-        return this.authService.signIn(signInDto.username, signInDto.password);
-    }
+      },
+    },
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized, invalid credentials.',
+  })
+  signIn(@Body() signInDto: LoginUserDto) {
+    return this.authService.signIn(signInDto.username, signInDto.password);
+  }
 }

@@ -46,23 +46,40 @@ describe('AuthController', () => {
       const result = await controller.signIn(loginUserDto);
 
       expect(result).toEqual(expectedResult);
-      expect(authService.signIn).toHaveBeenCalledWith(loginUserDto.username, loginUserDto.password);
+      expect(authService.signIn).toHaveBeenCalledWith(
+        loginUserDto.username,
+        loginUserDto.password,
+      );
     });
 
     it('should pass through unauthorized exception from service when credentials are invalid', async () => {
-      mockAuthService.signIn.mockRejectedValue(new UnauthorizedException('Invalid credentials'));
+      mockAuthService.signIn.mockRejectedValue(
+        new UnauthorizedException('Invalid credentials'),
+      );
 
-      await expect(controller.signIn(loginUserDto)).rejects.toThrow(UnauthorizedException);
-      await expect(controller.signIn(loginUserDto)).rejects.toThrow('Invalid credentials');
-      expect(authService.signIn).toHaveBeenCalledWith(loginUserDto.username, loginUserDto.password);
+      await expect(controller.signIn(loginUserDto)).rejects.toThrow(
+        UnauthorizedException,
+      );
+      await expect(controller.signIn(loginUserDto)).rejects.toThrow(
+        'Invalid credentials',
+      );
+      expect(authService.signIn).toHaveBeenCalledWith(
+        loginUserDto.username,
+        loginUserDto.password,
+      );
     });
 
     it('should pass through other errors from service', async () => {
       const error = new Error('Unexpected error');
       mockAuthService.signIn.mockRejectedValue(error);
 
-      await expect(controller.signIn(loginUserDto)).rejects.toThrow('Unexpected error');
-      expect(authService.signIn).toHaveBeenCalledWith(loginUserDto.username, loginUserDto.password);
+      await expect(controller.signIn(loginUserDto)).rejects.toThrow(
+        'Unexpected error',
+      );
+      expect(authService.signIn).toHaveBeenCalledWith(
+        loginUserDto.username,
+        loginUserDto.password,
+      );
     });
   });
 });

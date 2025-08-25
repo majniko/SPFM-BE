@@ -4,20 +4,20 @@ A robust and scalable backend service for a personal finance tracking applicatio
 
 ## ✨ Features
 
--   **User Management**: Secure user registration and authentication using JWT.
--   **Category Management**: Full CRUD (Create, Read, Update, Delete) functionality for personalized expense/income categories.
--   **Transaction Tracking**: Log, view, and manage financial transactions.
--   **API Documentation**: Interactive API documentation powered by Swagger (OpenAPI).
--   **Scalable Architecture**: Built with a modular structure to easily extend and maintain.
+- **User Management**: Secure user registration and authentication using JWT.
+- **Category Management**: Full CRUD (Create, Read, Update, Delete) functionality for personalized expense/income categories.
+- **Transaction Tracking**: Log, view, and manage financial transactions.
+- **API Documentation**: Interactive API documentation powered by Swagger (OpenAPI).
+- **Scalable Architecture**: Built with a modular structure to easily extend and maintain.
 
 ## 🛠️ Tech Stack
 
--   **Backend**: [NestJS](https://nestjs.com/)
--   **Language**: [TypeScript](https://www.typescriptlang.org/)
--   **Database ORM**: [Prisma](https://www.prisma.io/)
--   **Database**: [MongoDB](https://www.mongodb.com/)
--   **Authentication**: [JWT (JSON Web Tokens)](https://jwt.io/)
--   **Validation**: [class-validator](https://github.com/typestack/class-validator) & [class-transformer](https://github.com/typestack/class-transformer)
+- **Backend**: [NestJS](https://nestjs.com/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Database ORM**: [Prisma](https://www.prisma.io/)
+- **Database**: [MongoDB](https://www.mongodb.com/)
+- **Authentication**: [JWT (JSON Web Tokens)](https://jwt.io/)
+- **Validation**: [class-validator](https://github.com/typestack/class-validator) & [class-transformer](https://github.com/typestack/class-transformer)
 
 ## 🚀 Getting Started
 
@@ -25,19 +25,21 @@ Follow these instructions to get the project up and running on your local machin
 
 ### Prerequisites
 
--   [Node.js](https://nodejs.org/en/) (v18 or newer)
--   [npm](https://www.npmjs.com/)
--   A running [MongoDB](https://www.mongodb.com/try/download/community) instance
+- [Node.js](https://nodejs.org/en/) (v18 or newer)
+- [npm](https://www.npmjs.com/)
+- A running [MongoDB](https://www.mongodb.com/try/download/community) instance
 
 ### Installation & Setup
 
 1.  **Clone the repository:**
+
     ```bash
     https://github.com/majniko/SPFM-BE.git
     cd SPFM-BE
     ```
 
 2.  **Install dependencies:**
+
     ```bash
     npm install
     ```
@@ -55,6 +57,7 @@ Follow these instructions to get the project up and running on your local machin
 
 4.  **Generate the Prisma Client:**
     This command reads your `schema.prisma` file and generates the TypeScript types for your database models.
+
     ```bash
     npx prisma generate
     ```
@@ -65,7 +68,7 @@ Follow these instructions to get the project up and running on your local machin
     ```
     The server will start in watch mode, typically on `http://localhost:3000`.
 
-##  API Documentation
+## API Documentation
 
 This project uses Swagger to provide rich, interactive API documentation. Once the server is running, you can access the Swagger UI by navigating to:
 
@@ -77,9 +80,9 @@ The documentation is automatically generated from the decorators in the controll
 
 The application is organized into modules to maintain a clean and scalable architecture:
 
--   `src/core`: Contains core functionalities like Prisma integration and configuration.
--   `src/domains/identity`: Handles user management (`users`) and authentication (`auth`).
--   `src/domains/finance`: Manages core business logic like `categories` and `transactions`.
+- `src/core`: Contains core functionalities like Prisma integration and configuration.
+- `src/domains/identity`: Handles user management (`users`) and authentication (`auth`).
+- `src/domains/finance`: Manages core business logic like `categories` and `transactions`.
 
 ## 📄 License
 

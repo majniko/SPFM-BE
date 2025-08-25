@@ -1,5 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CanActivate, ConflictException, NotFoundException } from '@nestjs/common';
+import {
+  CanActivate,
+  ConflictException,
+  NotFoundException,
+} from '@nestjs/common';
 
 import { AuthGuard } from '@identity/auth/auth.guard';
 
@@ -32,7 +36,8 @@ describe('CategoriesController', () => {
           useValue: mockCategoriesService,
         },
       ],
-    }).overrideGuard(AuthGuard)
+    })
+      .overrideGuard(AuthGuard)
       .useValue(mockAuthGuard)
       .compile();
 
@@ -59,15 +64,22 @@ describe('CategoriesController', () => {
       const result = await controller.create(createCategoryDto, userId);
 
       expect(result).toEqual(expectedResult);
-      expect(categoriesService.create).toHaveBeenCalledWith(createCategoryDto, userId);
+      expect(categoriesService.create).toHaveBeenCalledWith(
+        createCategoryDto,
+        userId,
+      );
     });
 
     it('should pass through conflict exception from service', async () => {
       const error = new ConflictException('category_exists');
       mockCategoriesService.create.mockRejectedValue(error);
 
-      await expect(controller.create(createCategoryDto, userId)).rejects.toThrow(ConflictException);
-      await expect(controller.create(createCategoryDto, userId)).rejects.toThrow('category_exists');
+      await expect(
+        controller.create(createCategoryDto, userId),
+      ).rejects.toThrow(ConflictException);
+      await expect(
+        controller.create(createCategoryDto, userId),
+      ).rejects.toThrow('category_exists');
     });
   });
 
@@ -78,7 +90,7 @@ describe('CategoriesController', () => {
         { id: 'cat-1', name: 'Groceries', userId },
         { id: 'cat-2', name: 'Salary', userId },
       ];
-      
+
       mockCategoriesService.findAll.mockResolvedValue(mockCategories);
 
       const result = await controller.findAll(userId);
@@ -99,26 +111,42 @@ describe('CategoriesController', () => {
       const expectedResult = { message: 'category_updated' };
       mockCategoriesService.update.mockResolvedValue(expectedResult);
 
-      const result = await controller.update(categoryId, updateCategoryDto, userId);
+      const result = await controller.update(
+        categoryId,
+        updateCategoryDto,
+        userId,
+      );
 
       expect(result).toEqual(expectedResult);
-      expect(categoriesService.update).toHaveBeenCalledWith(categoryId, updateCategoryDto, userId);
+      expect(categoriesService.update).toHaveBeenCalledWith(
+        categoryId,
+        updateCategoryDto,
+        userId,
+      );
     });
 
     it('should pass through conflict exception from service', async () => {
       const error = new ConflictException('category_exists');
       mockCategoriesService.update.mockRejectedValue(error);
 
-      await expect(controller.update(categoryId, updateCategoryDto, userId)).rejects.toThrow(ConflictException);
-      await expect(controller.update(categoryId, updateCategoryDto, userId)).rejects.toThrow('category_exists');
+      await expect(
+        controller.update(categoryId, updateCategoryDto, userId),
+      ).rejects.toThrow(ConflictException);
+      await expect(
+        controller.update(categoryId, updateCategoryDto, userId),
+      ).rejects.toThrow('category_exists');
     });
 
     it('should pass through not found exception from service', async () => {
       const error = new NotFoundException('category_not_found');
       mockCategoriesService.update.mockRejectedValue(error);
 
-      await expect(controller.update(categoryId, updateCategoryDto, userId)).rejects.toThrow(NotFoundException);
-      await expect(controller.update(categoryId, updateCategoryDto, userId)).rejects.toThrow('category_not_found');
+      await expect(
+        controller.update(categoryId, updateCategoryDto, userId),
+      ).rejects.toThrow(NotFoundException);
+      await expect(
+        controller.update(categoryId, updateCategoryDto, userId),
+      ).rejects.toThrow('category_not_found');
     });
   });
 
@@ -140,8 +168,12 @@ describe('CategoriesController', () => {
       const error = new NotFoundException('category_not_found');
       mockCategoriesService.remove.mockRejectedValue(error);
 
-      await expect(controller.remove(categoryId, userId)).rejects.toThrow(NotFoundException);
-      await expect(controller.remove(categoryId, userId)).rejects.toThrow('category_not_found');
+      await expect(controller.remove(categoryId, userId)).rejects.toThrow(
+        NotFoundException,
+      );
+      await expect(controller.remove(categoryId, userId)).rejects.toThrow(
+        'category_not_found',
+      );
     });
   });
 });

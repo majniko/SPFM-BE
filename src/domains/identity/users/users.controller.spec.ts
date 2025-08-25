@@ -51,24 +51,38 @@ describe('UsersController', () => {
     });
 
     it('should pass through username conflict exception from service', async () => {
-      mockUsersService.create.mockRejectedValue(new ConflictException('username_exists'));
+      mockUsersService.create.mockRejectedValue(
+        new ConflictException('username_exists'),
+      );
 
-      await expect(controller.create(createUserDto)).rejects.toThrow(ConflictException);
-      await expect(controller.create(createUserDto)).rejects.toThrow('username_exists');
+      await expect(controller.create(createUserDto)).rejects.toThrow(
+        ConflictException,
+      );
+      await expect(controller.create(createUserDto)).rejects.toThrow(
+        'username_exists',
+      );
     });
 
     it('should pass through email conflict exception from service', async () => {
-      mockUsersService.create.mockRejectedValue(new ConflictException('email_exists'));
+      mockUsersService.create.mockRejectedValue(
+        new ConflictException('email_exists'),
+      );
 
-      await expect(controller.create(createUserDto)).rejects.toThrow(ConflictException);
-      await expect(controller.create(createUserDto)).rejects.toThrow('email_exists');
+      await expect(controller.create(createUserDto)).rejects.toThrow(
+        ConflictException,
+      );
+      await expect(controller.create(createUserDto)).rejects.toThrow(
+        'email_exists',
+      );
     });
 
     it('should pass through other errors from service', async () => {
       const error = new Error('Unexpected error');
       mockUsersService.create.mockRejectedValue(error);
 
-      await expect(controller.create(createUserDto)).rejects.toThrow('Unexpected error');
+      await expect(controller.create(createUserDto)).rejects.toThrow(
+        'Unexpected error',
+      );
     });
   });
 });

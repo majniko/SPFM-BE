@@ -78,8 +78,12 @@ describe('AuthService', () => {
     it('should throw UnauthorizedException when user is not found', async () => {
       mockUsersService.findOne.mockResolvedValue(null);
 
-      await expect(service.signIn(username, password)).rejects.toThrow(UnauthorizedException);
-      await expect(service.signIn(username, password)).rejects.toThrow('Invalid credentials');
+      await expect(service.signIn(username, password)).rejects.toThrow(
+        UnauthorizedException,
+      );
+      await expect(service.signIn(username, password)).rejects.toThrow(
+        'Invalid credentials',
+      );
       expect(mockUsersService.findOne).toHaveBeenCalledWith(username);
       expect(bcrypt.compare).not.toHaveBeenCalled();
       expect(mockJwtService.signAsync).not.toHaveBeenCalled();
@@ -89,8 +93,12 @@ describe('AuthService', () => {
       mockUsersService.findOne.mockResolvedValue(mockUser);
       (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
-      await expect(service.signIn(username, password)).rejects.toThrow(UnauthorizedException);
-      await expect(service.signIn(username, password)).rejects.toThrow('Invalid credentials');
+      await expect(service.signIn(username, password)).rejects.toThrow(
+        UnauthorizedException,
+      );
+      await expect(service.signIn(username, password)).rejects.toThrow(
+        'Invalid credentials',
+      );
       expect(mockUsersService.findOne).toHaveBeenCalledWith(username);
       expect(bcrypt.compare).toHaveBeenCalledWith(password, mockUser.pwdHash);
       expect(mockJwtService.signAsync).not.toHaveBeenCalled();

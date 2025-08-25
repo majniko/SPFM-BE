@@ -40,11 +40,29 @@ describe('TransactionsService', () => {
     it('should return all transactions for a user', async () => {
       const userId = 'user-123';
       const mockTransactions = [
-        { id: '1', title: 'Groceries', amount: 50, isExpense: true, categoryId: 'cat-1', date: new Date(), userId },
-        { id: '2', title: 'Salary', amount: 1000, isExpense: false, categoryId: 'cat-2', date: new Date(), userId },
+        {
+          id: '1',
+          title: 'Groceries',
+          amount: 50,
+          isExpense: true,
+          categoryId: 'cat-1',
+          date: new Date(),
+          userId,
+        },
+        {
+          id: '2',
+          title: 'Salary',
+          amount: 1000,
+          isExpense: false,
+          categoryId: 'cat-2',
+          date: new Date(),
+          userId,
+        },
       ];
-      
-      mockPrismaService.transactions.findMany.mockResolvedValue(mockTransactions);
+
+      mockPrismaService.transactions.findMany.mockResolvedValue(
+        mockTransactions,
+      );
 
       const result = await service.findAllByUserId(userId);
 
@@ -96,8 +114,12 @@ describe('TransactionsService', () => {
       const error = new Error('Database error');
       mockPrismaService.transactions.create.mockRejectedValue(error);
 
-      await expect(service.create(createTransactionDto, userId)).rejects.toThrow(InternalServerErrorException);
-      await expect(service.create(createTransactionDto, userId)).rejects.toThrow('unexpected_prisma_error');
+      await expect(
+        service.create(createTransactionDto, userId),
+      ).rejects.toThrow(InternalServerErrorException);
+      await expect(
+        service.create(createTransactionDto, userId),
+      ).rejects.toThrow('unexpected_prisma_error');
     });
   });
 });

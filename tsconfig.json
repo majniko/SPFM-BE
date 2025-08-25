@@ -27,7 +27,6 @@
       "@identity/*": ["./src/domains/identity/*"],
       "@finance/*": ["./src/domains/finance/*"],
       "@communication/*": ["./src/domains/communication/*"]
-
     }
   },
   "include": ["src/**/*"]
